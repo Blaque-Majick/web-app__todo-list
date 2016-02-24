@@ -17,3 +17,15 @@ MyApp.get "/todos_list" do
   erb :"/todos/todos_list"
 end
 
+MyApp.get "/edit_todo_form/:todo_id" do
+  @todo = Todo.find_by_id(params[:todo_id])
+  erb :"todos/edit_todo_form"
+end
+
+MyApp.post "/edit_todo/:todo_id" do
+  @todo = Todo.find_by_id(params[:todo_id])
+  @todo.title = params["title"]
+  @todo.description = params["description"]
+  @todo.save
+  erb :"/todos/update_success"
+end
