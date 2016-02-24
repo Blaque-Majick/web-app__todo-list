@@ -14,7 +14,7 @@ MyApp.post "/new_user" do
   erb :"/users/create_success"
 end
 
-MyApp.get "/user_list" do
+MyApp.get "/users_list" do
   @users = User.all
   erb :"/users/users_list"
 end
@@ -32,4 +32,10 @@ MyApp.post "/update_user/:user_id" do
   @user.password = params["password"]
   @user.save
   erb :"/users/update_success"
+end
+
+MyApp.post "/delete_user/:user_id" do
+  @user = User.find_by_id(params[:user_id])
+  @user.delete 
+  erb :"/users/delete_success"
 end
