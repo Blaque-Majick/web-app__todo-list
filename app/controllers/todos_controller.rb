@@ -11,3 +11,9 @@ MyApp.post "/new_todo" do
   @todo.save
   erb :"/todos/create_success"
 end
+
+MyApp.get "/todos_list" do
+  @todos = Todo.all
+  erb :"/todos/todos_list"
+end
+
