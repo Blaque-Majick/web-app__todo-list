@@ -5,3 +5,26 @@
 # and deleted (i.e. 'logging out').
 # 
 # Reading and Updating a login, however, make a little less sense.
+
+MyApp.get "/" do 
+  erb :"homepage"
+end
+
+MyApp.get "/logins/new" do
+  erb :"logins/new"
+end
+
+MyApp.post "/logins/create" do
+  @user = User.find_by_email(params["email"])
+  if @user != nil && @user.password == params(["password"]) 
+    session["user_id"] = @user.id
+    erb :"logins/success"
+  else
+    erb :"logins/failed"
+  end
+end
+
+MyApp.get "logins/delete" do
+  session["user_id"] = nil
+  erb :"/logins/deleted"
+end

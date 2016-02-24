@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "name"
     t.string   "email"
     t.string   "password"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
 end
