@@ -24,3 +24,12 @@ MyApp.get "/edit_user_form/:user_id" do
   erb :"/users/edit_user_form"
 end
 
+MyApp.post "/update_user/:user_id" do
+  @user = User.find_by_id(params[:user_id])
+  @user.first_name = params["first_name"]
+  @user.last_name = params["last_name"]
+  @user.email = params["email"]
+  @user.password = params["password"]
+  @user.save
+  erb :"/users/update_success"
+end

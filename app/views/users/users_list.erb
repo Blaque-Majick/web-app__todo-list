@@ -2,7 +2,15 @@
 
 <ul style="list-style-type:square">
   <% @users.each do |u| %>
-    <li><%= u.first_name %> <%= u.last_name %></li>
+    <li>
+      <%= u.first_name %> <%= u.last_name %><br>
+      <form action="edit_user_form/<%=u.id%>">
+        <input type="submit" value="Edit">
+      </form>
+      <form action-"delete_user/<%=u.id%>">
+        <input type="submit" value="Delete">
+      </form>
+    </li>
   <% end %>
 </ul>
 
