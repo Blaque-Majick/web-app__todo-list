@@ -1,3 +1,5 @@
+<br><br><br>
+
 <h1>Users</h1>
 
 <table>
@@ -7,12 +9,12 @@
       <%= u.first_name %> <%= u.last_name %><br>
     </td>
     <td>
-      <form action="edit_user_form/<%=u.id%>">
+      <form action="/users/<%=u.id%>/edit">
         <input type="submit" value="Edit">
       </form>
     </td>
     <td>
-      <form action="delete_user/<%=u.id%>" method="post">
+      <form action="/users/<%=u.id%>/delete" method="post">
         <input type="submit" value="Delete">
       </form>
     </td>

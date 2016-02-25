@@ -1,5 +1,7 @@
 <center>
 
+<br><br><br>
+
   <h1>To-Do List</h1>
 
   <table style="width:20%">
@@ -7,7 +9,7 @@
     <% @todos.each do |t| %>
       <tr>
         <td>
-          <form action="/complete_todo">
+          <form action="/todos/<%=t.id%>">
             <input type="checkbox" name="completed">
           </form>
         </td>
@@ -17,14 +19,17 @@
           </a>
         </td>
         <td> 
-          <form action="/edit_todo_form/<%=t.id%>"> 
+          <form action="/todos/<%=t.id%>/edit"> 
             <input type="submit" value="Edit">
           </form>
         </td>
         <td>
-          <form action="/delete_todo/<%=t.id%>" method="post">
+          <form action="/todos/<%=t.id%>/delete" method="post">
             <input type="submit" value="Delete">
           </form>
+        </td>
+        <td>
+          <%=t.user_access.first_name%>
         </td>
       </tr>
     <% end %>
@@ -34,7 +39,7 @@
   <br>
   <br>
 
-  <a href="/new_todo_form">Add a Task</a> |
+  <a href="/todos/new">Add a Task</a> |
   <a href="/">Home</a>
 
 </center>

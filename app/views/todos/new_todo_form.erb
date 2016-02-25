@@ -1,7 +1,25 @@
+<br><br><br>
+
 <h1>Add a To-Do Task</h1>
 
-<form action="/new_todo" method="post">
+<form action="/todos/create" method="post">
 
+  <label for="user_id"><sub><i>User ID:</i></sub></label><br>
+    <select name="user_id">
+      <% @users.each do |u| %>
+        <option value="<%=u.id%>">
+          <%=u.last_name%>, <%=u.first_name%>
+        </option>
+      <% end %>
+    </select>
+  <label for="priority_id"><sub><i>Priority ID:</i></sub></label><br>
+  <select name="priority_id">
+    <% @priorities.each do |p| %>
+      <option value="<%=p.id%>">
+        <%=p.priority%>
+      </option>
+    <% end %>
+  </select>
   <label for="title"><sub><i>Title:</i></sub></label><br>
   <input type="text" name="title">
   <br>

@@ -1,6 +1,8 @@
+<br><br><br>
+
 <h1>Edit Task</h1>
 
-<form action="/edit_todo/<%=@todo.id%>" method="post">
+<form action="/todos/<%=@todo.id%>/update" method="post">
 
   <label for="title"><sub><i>Title:</i></sub></label><br>
   <input type="text" name="title" value="<%=@todo.title%>">

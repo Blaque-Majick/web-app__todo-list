@@ -19,7 +19,7 @@ MyApp.post "/logins/create" do
   
   if @user != nil && @user.password == params(["password"]) 
     session["user_id"] = @user.id
-    erb :"logins/success"
+    redirect "/todos"
   else
     erb :"logins/fail"
   end
@@ -27,5 +27,5 @@ end
 
 MyApp.get "logins/delete" do
   session["user_id"] = nil
-  erb :"/logins/deleted"
+  redirect "/"
 end

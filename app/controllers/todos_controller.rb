@@ -1,86 +1,53 @@
 # This controller is for all the CRUD operations related to a Todo.
-
-MyApp.get "/new_todo_form" do
+MyApp.before "/todos*" do
   @current_user = User.find_by_id(session["user_id"]) 
-    if @current_user != nil
-      erb :"/todos/new_todo_form"
-    else
-      erb :"login_required"
+    if @current_user == nil
+      redirect "/logins/new" 
     end
 end
 
-MyApp.post "/new_todo" do
-  @current_user = User.find_by_id(session["user_id"]) 
-    if @current_user != nil
-      @todo = Todo.new
-      @todo.title = params["title"]
-      @todo.description = params["description"]
-      @todo.done = false
-      @todo.user_id = session["user_id"]
-      @todo.save
-      erb :"/todos/create_success"
-    else
-      erb :"login_required"
-    end
+MyApp.get "/todos/new" do
+  @users = User.all
+  @priorities = Priority.all
+  erb :"/todos/new_todo_form"
 end
 
-MyApp.get "/todos_list" do
+MyApp.post "/todos/create" do
+  @todo = Todo.new
+  @todo.title = params["title"]
+  @todo.description = params["description"]
+  @todo.user_id = params["user_id"]
+  @todo.priority_id = params["priority_id"]
+  @todo.completed = false
+  @todo.save
+  redirect "/todos"
+end
+
+MyApp.get "/todos" do
   @todos = Todo.all
   erb :"/todos/todos_list"
 end
 
-MyApp.get "/edit_todo_form/:todo_id" do
-  @current_user = User.find_by_id(session["user_id"]) 
-    if @current_user != nil
-      @todo = Todo.find_by_id(params[:todo_id])
-      erb :"todos/edit_todo_form"
-    else
-      erb :"login_required"
-    end
+MyApp.get "/todos/:id/edit" do
+  @todo = Todo.find_by_id(params[:id])
+  erb :"todos/edit_todo_form"
 end
 
-MyApp.post "/edit_todo/:todo_id" do
-  @current_user = User.find_by_id(session["user_id"]) 
-    if @current_user != nil
-      @todo = Todo.find_by_id(params[:todo_id])
-      @todo.title = params["title"]
-      @todo.description = params["description"]
-      @todo.save
-      erb :"/todos/update_success"
-    else
-      erb :"login_required"
-    end
+MyApp.post "/todos/:id/update" do
+  @todo = Todo.find_by_id(params[:id])
+  @todo.title = params["title"]
+  @todo.description = params["description"]
+  @todo.save
+  erb :"/todos/update_success"
 end
 
-MyApp.post "/delete_todo/:todo_id" do
-  @current_user = User.find_by_id(session["user_id"]) 
-    if @current_user != nil
-      @todo = Todo.find_by_id(params[:todo_id])
-      @todo.delete
-      erb :"/todos/delete_success"
-    else
-      erb :"login_required"
-    end
+MyApp.post "/todos/:id/delete" do
+  @todo = Todo.find_by_id(params[:id])
+  @todo.delete
+  redirect "/todos"
 end
 
 MyApp.get "/todo_page/:todo_id" do
-  @current_user = User.find_by_id(session["user_id"]) 
-    if @current_user != nil
-      @todo = Todo.find_by_id(params[:todo_id])
-      erb :"/todos/todo_page"
-    else
-      erb :"login_required"
-    end
-end
-
-MyApp.post "/complete_todo/:todo_id" do
-  @todos = Todo.all
   @todo = Todo.find_by_id(params[:todo_id])
-  if @todo.done == nil || @todo.done == false
-    @todo.done = true
-  else
-    @todo.done = false
-  end
-    @todo.save
-    erb :"/todos/todos_list"
-  end
+  erb :"/todos/todo_page"
+end
