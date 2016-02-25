@@ -18,6 +18,7 @@ MyApp.post "/todos/create" do
   @todo.description = params["description"]
   @todo.user_id = params["user_id"]
   @todo.priority_id = params["priority_id"]
+  @todo.creator_id = session["user_id"]
   @todo.completed = false
   @todo.save
   redirect "/todos"

@@ -1,17 +1,22 @@
-<center>
-
 <br><br><br>
 
   <h1><%= @todo.title %></h1>
 
   <p>
+    Priority:<br>
+    <%= @todo.priority_access.priority %>
+  </p>
+  <p>
+    Description:<br>
     <%= @todo.description %>
 
+  </p>
+  <p>
+    Created ID:<br>
+    <%= @todo.creator_name%>
   </p>
 
   <br>
 
-  <a href="/todos_list">To-Do List</a> |
+  <a href="/todos">To-Do List</a><br>
   <a href="/">Home</a>
-
-</center>
