@@ -6,4 +6,8 @@ class Todo < ActiveRecord::Base
     return y
   end
 
+  def priority_access
+    x = self.priority_id
+    y = Priority.find_by_id(x)
+    return y
 end
