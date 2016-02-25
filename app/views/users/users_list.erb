@@ -1,18 +1,24 @@
 <h1>Users</h1>
 
-<ul style="list-style-type:square">
-  <% @users.each do |u| %>
-    <li>
+<table>
+  <tr>
+    <% @users.each do |u| %>
+    <td>
       <%= u.first_name %> <%= u.last_name %><br>
+    </td>
+    <td>
       <form action="edit_user_form/<%=u.id%>">
         <input type="submit" value="Edit">
       </form>
+    </td>
+    <td>
       <form action="delete_user/<%=u.id%>" method="post">
         <input type="submit" value="Delete">
       </form>
-    </li>
-  <% end %>
-</ul>
+    </td>
+    <% end %>
+  </tr>
+</table>
 
 <br>
 <br>

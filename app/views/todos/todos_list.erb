@@ -22,7 +22,7 @@
           </form>
         </td>
         <td>
-          <form action="/delete_todo/<%=t.id%>">
+          <form action="/delete_todo/<%=t.id%>" method="post">
             <input type="submit" value="Delete">
           </form>
         </td>
@@ -34,6 +34,7 @@
   <br>
   <br>
 
-  <a href="/new_todo_form">Add a Task</a>
+  <a href="/new_todo_form">Add a Task</a> |
+  <a href="/">Home</a>
 
 </center>
